@@ -1,18 +1,15 @@
 #include "SDL.h"
 #include "../includes/ball.h"
 
-void Draw_circle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius)
-{
-    const int32_t diameter = (radius * 2);
+void Draw_circle(SDL_Renderer* renderer, int centreX, int centreY, int radius){
 
-    int32_t x = (radius - 1);
-    int32_t y = 0;
-    int32_t tx = 1;
-    int32_t ty = 1;
-    int32_t error = (tx - diameter);
+    int x = (radius - 1);
+    int y = 0;
+    int xError = 1;
+    int yError = 1;
+    int error = (xError - radius * 2);
 
-    while (x >= y)
-    {
+    while (x >= y){
         SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
         SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
         SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
@@ -22,18 +19,16 @@ void Draw_circle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32
         SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
         SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
 
-        if (error <= 0)
-        {
+        if (error <= 0){ // Проверка на движение вверх по окружности
             ++y;
-            error += ty;
-            ty += 2;
+            error += yError;
+            yError += 2;
         }
 
-        if (error > 0)
-        {
+        if (error > 0){ // Проверка на движение влево по окружности
             --x;
-            tx += 2;
-            error += (tx - diameter);
+            xError += 2;
+            error += (xError - radius * 2);
         }
     }
 }
