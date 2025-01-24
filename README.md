@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/3c28235a-bb22-4402-bdd9-46a3a5459086)# Brick-Breaker
+# Brick-Breaker
 
 Игра представляет собой арканоид, целью которого является разбить шариком все прямоугольники на уровне.
 
