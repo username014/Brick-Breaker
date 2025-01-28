@@ -11,7 +11,10 @@ typedef struct Striker {
     SDL_Renderer* renderer;
 } Striker;
 
+struct Striker Striker_init(int maxX, int maxY, SDL_Color strikerColor);
 void Striker_display(SDL_Renderer* renderer, Striker striker);
+struct Striker Striker_update(Striker striker, int strikerXFac, int maxX);
+int Striker_moving(SDL_Event event);
 
 #endif
 

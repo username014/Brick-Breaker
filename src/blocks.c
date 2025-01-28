@@ -8,6 +8,9 @@ SDL_Color BLACK = { 0, 0, 0 };
 SDL_Color WHITE = { 255, 255, 255 };
 SDL_Color GREEN = { 0, 255, 0 };
 SDL_Color BLUE = { 0, 0, 255 };
+SDL_Color DARK_GREEN = { 0, 125, 0 };
+SDL_Color DARK_BLUE_1 = { 0, 0, 170 };
+SDL_Color DARK_BLUE_2 = { 0, 0, 60 };
 
 void Blocks_populating(int blockWidth, int blockHeight, int gapHorizontal, int gapVertical, SDL_Renderer* renderer, Block* listOfBlocks) { // Алгоритм заполнения массива, состоящего из блоков
     int WIDTH = 1200;
@@ -54,4 +57,20 @@ void Blocks_populating(int blockWidth, int blockHeight, int gapHorizontal, int g
 void Blocks_display(SDL_Renderer* renderer, Block* listOfBlocks, int block_number) {
     SDL_SetRenderDrawColor(renderer, listOfBlocks[block_number].color.r, listOfBlocks[block_number].color.g, listOfBlocks[block_number].color.b, 255);
     SDL_RenderFillRect(renderer, &listOfBlocks[block_number].blockRect);
+}
+
+struct Block Blocks_update(Block* listOfBlocks, int block_number) {
+    listOfBlocks[block_number].health -= listOfBlocks[block_number].damage;
+    if (listOfBlocks[block_number].level == 1 && listOfBlocks[block_number].health == 100) {
+        listOfBlocks[block_number].color = DARK_GREEN;
+    }
+    else if (listOfBlocks[block_number].level == 2) {
+        if (listOfBlocks[block_number].health == 200) {
+            listOfBlocks[block_number].color = DARK_BLUE_1;
+        }
+        else if (listOfBlocks[block_number].health == 100) {
+            listOfBlocks[block_number].color = DARK_BLUE_2;
+        }
+    }
+    return listOfBlocks[block_number];
 }
